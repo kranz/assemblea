@@ -1,0 +1,32 @@
+<%= form_for @presenza, :html => { :class => 'form-horizontal' } do |f| %>
+  <div class="control-group">
+    <%= f.label :socio_id, :class => 'control-label' %>
+    <div class="controls">
+      <%= f.number_field :socio_id, :class => 'number_field' %>
+    </div>
+  </div>
+  <div class="control-group">
+    <%= f.label :delegato, :class => 'control-label' %>
+    <div class="controls">
+      <%= f.text_field :delegato, :class => 'text_field' %>
+    </div>
+  </div>
+  <div class="control-group">
+    <%= f.label :presente, :class => 'control-label' %>
+    <div class="controls">
+      <%= f.text_field :presente, :class => 'text_field' %>
+    </div>
+  </div>
+  <div class="control-group">
+    <%= f.label :assemblea_id, :class => 'control-label' %>
+    <div class="controls">
+      <%= f.number_field :assemblea_id, :class => 'number_field' %>
+    </div>
+  </div>
+
+  <div class="form-actions">
+    <%= f.submit nil, :class => 'btn btn-primary' %>
+    <%= link_to t('.cancel', :default => t("helpers.links.cancel")),
+                presenze_path, :class => 'btn' %>
+  </div>
+<% end %>

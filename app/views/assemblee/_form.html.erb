@@ -1,0 +1,50 @@
+<%= form_for @assemblea, :html => { :class => 'form-horizontal' } do |f| %>
+  <div class="control-group">
+    <%= f.label :nome, :class => 'control-label' %>
+    <div class="controls">
+      <%= f.text_field :nome, :class => 'text_field' %>
+    </div>
+  </div>
+  <div class="control-group">
+    <%= f.label :data, :class => 'control-label' %>
+    <div class="controls">
+      <%= f.date_select :data, :class => 'date_select' %>
+    </div>
+  </div>
+  <div class="control-group">
+    <%= f.label :stato, :class => 'control-label' %>
+    <div class="controls">
+      <%= f.number_field :stato, :class => 'number_field' %>
+    </div>
+  </div>
+  <div class="control-group">
+    <%= f.label :eliminato, :class => 'control-label' %>
+    <div class="controls">
+      <%= f.text_field :eliminato, :class => 'text_field' %>
+    </div>
+  </div>
+  <div class="control-group">
+    <%= f.label :presidente, :class => 'control-label' %>
+    <div class="controls">
+      <%= f.text_field :presidente, :class => 'text_field' %>
+    </div>
+  </div>
+  <div class="control-group">
+    <%= f.label :orainizio, :class => 'control-label' %>
+    <div class="controls">
+      <%= f.time_select :orainizio, :class => 'time_select' %>
+    </div>
+  </div>
+  <div class="control-group">
+    <%= f.label :orafine, :class => 'control-label' %>
+    <div class="controls">
+      <%= f.time_select :orafine, :class => 'time_select' %>
+    </div>
+  </div>
+
+  <div class="form-actions">
+    <%= f.submit nil, :class => 'btn btn-primary' %>
+    <%= link_to t('.cancel', :default => t("helpers.links.cancel")),
+                assemblee_path, :class => 'btn' %>
+  </div>
+<% end %>

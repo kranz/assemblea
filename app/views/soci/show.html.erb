@@ -1,0 +1,29 @@
+<%- model_class = Socio -%>
+<div class="page-header">
+  <h1><%=t '.title', :default => model_class.model_name.human %></h1>
+</div>
+
+<dl class="dl-horizontal">
+  <dt><strong><%= model_class.human_attribute_name(:socio) %>:</strong></dt>
+  <dd><%= @socio.socio %></dd>
+  <dt><strong><%= model_class.human_attribute_name(:codsocio) %>:</strong></dt>
+  <dd><%= @socio.codsocio %></dd>
+  <dt><strong><%= model_class.human_attribute_name(:codtessera) %>:</strong></dt>
+  <dd><%= @socio.codtessera %></dd>
+  <dt><strong><%= model_class.human_attribute_name(:datanascita) %>:</strong></dt>
+  <dd><%= @socio.datanascita %></dd>
+  <dt><strong><%= model_class.human_attribute_name(:sezione) %>:</strong></dt>
+  <dd><%= @socio.sezione %></dd>
+</dl>
+
+<div class="form-actions">
+  <%= link_to t('.back', :default => t("helpers.links.back")),
+              soci_path, :class => 'btn'  %>
+  <%= link_to t('.edit', :default => t("helpers.links.edit")),
+              edit_socio_path(@socio), :class => 'btn' %>
+  <%= link_to t('.destroy', :default => t("helpers.links.destroy")),
+              socio_path(@socio),
+              :method => 'delete',
+              :data => { :confirm => t('.confirm', :default => t("helpers.links.confirm", :default => 'Are you sure?')) },
+              :class => 'btn btn-danger' %>
+</div>

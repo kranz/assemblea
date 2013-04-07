@@ -1,0 +1,16 @@
+it:
+  helpers:
+    actions: "Azioni"
+    links:
+      back: "Indietro"
+      cancel: "Annulla"
+      confirm: "Sei sicuro?"
+      destroy: "Elimina"
+      new: "Crea"
+      select: "Scegli"
+    titles:
+      edit: "Modifica"
+      save: "Salva"
+      new: "Crea"
+      delete: "Elimina"
+      select: "Scegli"

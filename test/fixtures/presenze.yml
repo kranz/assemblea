@@ -1,0 +1,13 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/Fixtures.html
+
+one:
+  socio_id: 1
+  delegato: MyString
+  presente: MyString
+  assemblea_id: 1
+
+two:
+  socio_id: 1
+  delegato: MyString
+  presente: MyString
+  assemblea_id: 1

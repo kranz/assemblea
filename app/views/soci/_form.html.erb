@@ -1,0 +1,38 @@
+<%= form_for @socio, :html => { :class => 'form-horizontal' } do |f| %>
+  <div class="control-group">
+    <%= f.label :socio, :class => 'control-label' %>
+    <div class="controls">
+      <%= f.text_field :socio, :class => 'text_field' %>
+    </div>
+  </div>
+  <div class="control-group">
+    <%= f.label :codsocio, :class => 'control-label' %>
+    <div class="controls">
+      <%= f.text_field :codsocio, :class => 'text_field' %>
+    </div>
+  </div>
+  <div class="control-group">
+    <%= f.label :codtessera, :class => 'control-label' %>
+    <div class="controls">
+      <%= f.text_field :codtessera, :class => 'text_field' %>
+    </div>
+  </div>
+  <div class="control-group">
+    <%= f.label :datanascita, :class => 'control-label' %>
+    <div class="controls">
+      <%= f.text_field :datanascita, :class => 'text_field' %>
+    </div>
+  </div>
+  <div class="control-group">
+    <%= f.label :sezione, :class => 'control-label' %>
+    <div class="controls">
+      <%= f.text_field :sezione, :class => 'text_field' %>
+    </div>
+  </div>
+
+  <div class="form-actions">
+    <%= f.submit nil, :class => 'btn btn-primary' %>
+    <%= link_to t('.cancel', :default => t("helpers.links.cancel")),
+                soci_path, :class => 'btn' %>
+  </div>
+<% end %>

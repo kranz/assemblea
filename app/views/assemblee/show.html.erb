@@ -1,0 +1,33 @@
+<%- model_class = Assemblea -%>
+<div class="page-header">
+  <h1><%=t '.title', :default => model_class.model_name.human %></h1>
+</div>
+
+<dl class="dl-horizontal">
+  <dt><strong><%= model_class.human_attribute_name(:nome) %>:</strong></dt>
+  <dd><%= @assemblea.nome %></dd>
+  <dt><strong><%= model_class.human_attribute_name(:data) %>:</strong></dt>
+  <dd><%= @assemblea.data %></dd>
+  <dt><strong><%= model_class.human_attribute_name(:stato) %>:</strong></dt>
+  <dd><%= @assemblea.stato %></dd>
+  <dt><strong><%= model_class.human_attribute_name(:eliminato) %>:</strong></dt>
+  <dd><%= @assemblea.eliminato %></dd>
+  <dt><strong><%= model_class.human_attribute_name(:presidente) %>:</strong></dt>
+  <dd><%= @assemblea.presidente %></dd>
+  <dt><strong><%= model_class.human_attribute_name(:orainizio) %>:</strong></dt>
+  <dd><%= @assemblea.orainizio %></dd>
+  <dt><strong><%= model_class.human_attribute_name(:orafine) %>:</strong></dt>
+  <dd><%= @assemblea.orafine %></dd>
+</dl>
+
+<div class="form-actions">
+  <%= link_to t('.back', :default => t("helpers.links.back")),
+              assemblee_path, :class => 'btn'  %>
+  <%= link_to t('.edit', :default => t("helpers.links.edit")),
+              edit_assemblea_path(@assemblea), :class => 'btn' %>
+  <%= link_to t('.destroy', :default => t("helpers.links.destroy")),
+              assemblea_path(@assemblea),
+              :method => 'delete',
+              :data => { :confirm => t('.confirm', :default => t("helpers.links.confirm", :default => 'Are you sure?')) },
+              :class => 'btn btn-danger' %>
+</div>

@@ -1,0 +1,50 @@
+<%- model_class = Assemblea -%>
+<div class="page-header">
+  <h1><%=t '.title', :default => model_class.model_name.human.pluralize %></h1>
+</div>
+<table class="table table-striped">
+  <thead>
+    <tr>
+      <th><%= model_class.human_attribute_name(:id) %></th>
+      <th><%= model_class.human_attribute_name(:nome) %></th>
+      <th><%= model_class.human_attribute_name(:data) %></th>
+      <th><%= model_class.human_attribute_name(:stato) %></th>
+      <th><%= model_class.human_attribute_name(:eliminato) %></th>
+      <th><%= model_class.human_attribute_name(:presidente) %></th>
+      <th><%= model_class.human_attribute_name(:orainizio) %></th>
+      <th><%= model_class.human_attribute_name(:orafine) %></th>
+      <th><%=t '.actions', :default => t("helpers.actions") %></th>
+    </tr>
+  </thead>
+  <tbody>
+    <% @assemblee.each do |assemblea| %>
+      <tr <%= 'class=success' if session[:assemblea_id]==assemblea.id.to_s %> <%= 'id=asbl'+assemblea.id.to_s %>>
+        <td><%= link_to assemblea.id, assemblea_path(assemblea) %></td>
+        <td><%= assemblea.nome %></td>
+        <td><%= assemblea.data %></td>
+        <td><%= assemblea.stato %></td>
+        <td><%= assemblea.eliminato %></td>
+        <td><%= assemblea.presidente %></td>
+        <td><%= assemblea.orainizio.strftime("%H:%M") %></td>
+        <td><%= assemblea.orafine.strftime("%H:%M") %></td>
+        <td>
+          <%= link_to t('.edit', :default => t("helpers.links.edit")),
+                      edit_assemblea_path(assemblea), :class => 'btn btn-mini' %>
+          <%= link_to t('.destroy', :default => t("helpers.links.destroy")),
+                      assemblea_path(assemblea),
+                      :method => :delete,
+                      :data => { :confirm => t('.confirm', :default => t("helpers.links.confirm", :default => 'Are you sure?')) },
+                      :class => 'btn btn-mini btn-danger' %>
+          <%= link_to t('select'), 
+                        '#', 
+                        :data => { id: assemblea.id },
+                        :class => 'scegli btn btn-mini btn-warning' %>
+        </td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<%= link_to t('.new', :default => t("helpers.links.new")),
+            new_assemblea_path,
+            :class => 'btn btn-primary' %>

@@ -1,0 +1,19 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/Fixtures.html
+
+one:
+  nome: MyString
+  data: 2013-04-02
+  stato: 1
+  eliminato: MyString
+  presidente: MyString
+  orainizio: 2013-04-02 05:27:40
+  orafine: 2013-04-02 05:27:40
+
+two:
+  nome: MyString
+  data: 2013-04-02
+  stato: 1
+  eliminato: MyString
+  presidente: MyString
+  orainizio: 2013-04-02 05:27:40
+  orafine: 2013-04-02 05:27:40

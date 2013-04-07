@@ -1,0 +1,15 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/Fixtures.html
+
+one:
+  socio: MyString
+  codsocio: MyString
+  codtessera: MyString
+  datanascita: 2013-04-02
+  sezione: MyString
+
+two:
+  socio: MyString
+  codsocio: MyString
+  codtessera: MyString
+  datanascita: 2013-04-02
+  sezione: MyString
