@@ -1,3 +1,4 @@
 en:
-  recordpresence: "Register People"
-  select: "Select"
+  recordpresence: "Registrazione presenze"
+  select: "Scegli"
+  ispresent: " risulta già presente nell'assemblea "

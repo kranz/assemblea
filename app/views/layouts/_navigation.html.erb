@@ -18,7 +18,7 @@
     </li>
     <% if session[:assemblea_id] %>
       <li>
-        <%= link_to('Assemblea in corso: ' + Assemblea.find(session[:assemblea_id]).nome, '#', :class => 'text-info', :id => 'curasname') %> 
+          <%= link_to('Assemblea in corso: ' + Assemblea.find(session[:assemblea_id]).nome, '#', :class => 'text-info', :id => 'curasname') %> 
       </li>
     <% end %>
   <% else %>

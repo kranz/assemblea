@@ -93,7 +93,7 @@ class PresenzeController < ApplicationController
     @socio = Socio.find(params[:socio_id])
     @checkpres = Presenza.find_by_socio_id(params[:socio_id])
     if @checkpres 
-      redirect_to presenze_path, alert: @socio.socio + " risulta gia' registrato nell'assemblea " + @checkpres.assemblea.nome
+      redirect_to presenze_path, alert: @socio.socio + t('ispresent') + @checkpres.assemblea.nome
     else
       @presenza = Presenza.new
       @presenza.assemblea_id = session[:assemblea_id]
