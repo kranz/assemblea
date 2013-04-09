@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130406202314) do
+ActiveRecord::Schema.define(:version => 20130409155305) do
 
   create_table "assemblee", :force => true do |t|
     t.string   "nome"
@@ -23,15 +23,27 @@ ActiveRecord::Schema.define(:version => 20130406202314) do
     t.time     "orafine"
     t.datetime "created_at", :null => false
     t.datetime "updated_at", :null => false
+    t.integer  "sezione_id"
+  end
+
+  create_table "delegati", :force => true do |t|
+    t.string   "socio"
+    t.string   "codsocio"
+    t.string   "codtessera"
+    t.date     "datanascita"
+    t.string   "sezione"
+    t.datetime "created_at",  :null => false
+    t.datetime "updated_at",  :null => false
   end
 
   create_table "presenze", :force => true do |t|
     t.integer  "socio_id"
-    t.string   "delegato"
+    t.string   "isdelegato"
     t.string   "presente"
     t.integer  "assemblea_id"
     t.datetime "created_at",   :null => false
     t.datetime "updated_at",   :null => false
+    t.integer  "delegato_id"
   end
 
   create_table "sezioni", :force => true do |t|

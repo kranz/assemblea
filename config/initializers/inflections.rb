@@ -13,6 +13,7 @@
 ActiveSupport::Inflector.inflections do |inflect|
 #   inflect.acronym 'RESTful'
    inflect.irregular 'assemblea', 'assemblee'
+   inflect.irregular 'delegato', 'delegati'
    inflect.irregular 'presenza', 'presenze'
    inflect.irregular 'sezione', 'sezioni'
    inflect.irregular 'socio', 'soci'

@@ -3,7 +3,7 @@ class PresenzeController < ApplicationController
   # GET /presenze
   # GET /presenze.json
   def index
-    @presenze = Presenza.find(:all, :conditions => ['assemblea_id = ?', "#{session[:assemblea_id]}"])
+    @presenze = Presenza.joins(:socio).order('soci.socio').find(:all, :conditions => ['assemblea_id = ?', "#{session[:assemblea_id]}"])
     @assemblea = Assemblea.find(session[:assemblea_id])
     @soci = Socio.page(params[:page]).search(params[:search])
     if @soci
@@ -90,6 +90,7 @@ class PresenzeController < ApplicationController
   end
 
   def registra
+    @assemblea = Assemblea.find(session[:assemblea_id])
     @socio = Socio.find(params[:socio_id])
     @checkpres = Presenza.find_by_socio_id(params[:socio_id])
     if @checkpres 
@@ -99,6 +100,7 @@ class PresenzeController < ApplicationController
       @presenza.assemblea_id = session[:assemblea_id]
       @presenza.socio_id = params[:socio_id]
       @presenza.presente = "SI"
+      @presenza.isdelegato = ""
       respond_to do |format|
         if @presenza.save
           format.html { redirect_to presenze_path, notice: 'Registrata presenza per ' + @socio.socio }
@@ -111,6 +113,19 @@ class PresenzeController < ApplicationController
     end
   end 
 
+  def setdelegato
+    @presenza = Presenza.find(params[:presenza_id])
+    @socio=Socio.find(params[:socio_id])
+    msg = @presenza.isdelegato == "" ? "isappointed" : "isnotappointed"
+    @presenza.isdelegato = @presenza.isdelegato == "" ? "SI" : ""
+    respond_to do |format|
+      if @presenza.save
+        format.html { redirect_to presenze_path, notice: @socio.socio + t(msg)}
+      else
+        format.html { render action: "new" }
+      end    
+    end
+  end
   private
  
   def require_assemblea

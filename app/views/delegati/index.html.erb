@@ -1,0 +1,44 @@
+<%- model_class = Delegato -%>
+<div class="page-header">
+  <h1><%=t '.title', :default => model_class.model_name.human.pluralize %></h1>
+</div>
+<table class="table table-striped">
+  <thead>
+    <tr>
+      <th><%= model_class.human_attribute_name(:id) %></th>
+      <th><%= model_class.human_attribute_name(:socio) %></th>
+      <th><%= model_class.human_attribute_name(:codsocio) %></th>
+      <th><%= model_class.human_attribute_name(:codtessera) %></th>
+      <th><%= model_class.human_attribute_name(:datanascita) %></th>
+      <th><%= model_class.human_attribute_name(:sezione) %></th>
+      <th><%= model_class.human_attribute_name(:created_at) %></th>
+      <th><%=t '.actions', :default => t("helpers.actions") %></th>
+    </tr>
+  </thead>
+  <tbody>
+    <% @delegati.each do |delegato| %>
+      <tr>
+        <td><%= link_to delegato.id, delegato_path(delegato) %></td>
+        <td><%= delegato.socio %></td>
+        <td><%= delegato.codsocio %></td>
+        <td><%= delegato.codtessera %></td>
+        <td><%= delegato.datanascita %></td>
+        <td><%= delegato.sezione %></td>
+        <td><%=l delegato.created_at %></td>
+        <td>
+          <%= link_to t('.edit', :default => t("helpers.links.edit")),
+                      edit_delegato_path(delegato), :class => 'btn btn-mini' %>
+          <%= link_to t('.destroy', :default => t("helpers.links.destroy")),
+                      delegato_path(delegato),
+                      :method => :delete,
+                      :data => { :confirm => t('.confirm', :default => t("helpers.links.confirm", :default => 'Are you sure?')) },
+                      :class => 'btn btn-mini btn-danger' %>
+        </td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<%= link_to t('.new', :default => t("helpers.links.new")),
+            new_delegato_path,
+            :class => 'btn btn-primary' %>

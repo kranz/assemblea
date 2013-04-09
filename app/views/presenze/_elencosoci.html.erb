@@ -3,11 +3,9 @@
   <thead>
     <tr>
       <th><%=t '.actions', :default => t("helpers.actions") %></th>
-      <th><%= model_class.human_attribute_name(:socio) %></th>
-      <th><%= model_class.human_attribute_name(:codsocio) %></th>
-      <th><%= model_class.human_attribute_name(:codtessera) %></th>
-      <th><%= model_class.human_attribute_name(:datanascita) %></th>
-      <th><%= model_class.human_attribute_name(:sezione) %></th>
+      <th>Socio</th>
+      <th>Nato</th>
+      <th>Sezione</th>
     </tr>
   </thead>
   <tbody>
@@ -18,9 +16,7 @@
                       registra_path(socio), :class => 'btn btn-mini btn-success' %>
         </td>
         <td><%= socio.socio %></td>
-        <td><%= socio.codsocio %></td>
-        <td><%= socio.codtessera %></td>
-        <td><%= socio.datanascita %></td>
+        <td><%= socio.datanascita.strftime("%d/%m/%Y") unless !socio.datanascita %></td>
         <td><%= socio.sezione %></td>
       </tr>
     <% end %>

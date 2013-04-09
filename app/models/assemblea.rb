@@ -1,5 +1,6 @@
 class Assemblea < ActiveRecord::Base
-  attr_accessible :data, :eliminato, :nome, :orafine, :orainizio, :presidente, :stato
+  attr_accessible :data, :eliminato, :nome, :orafine, :orainizio, :presidente, :stato, :sezione_id
 
   has_many :presenze
+  belongs_to :sezione
 end

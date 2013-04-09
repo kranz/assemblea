@@ -15,7 +15,7 @@
     <header class="navbar navbar-fixed-top">
       <nav class="navbar-inner">
         <div class="container">
-          <%= render 'layouts/navigation' unless params[:controller]=="presenze" %>
+          <%= render 'layouts/navigation' %>
         </div>
       </nav>
     </header>
@@ -24,7 +24,7 @@
         <div class="content">
            <div class="row">
             <div class="span12">
-              <%= render 'layouts/messages' %>
+              <%= render 'layouts/messages' unless controller_name == 'presenze' && action_name == 'index'%>
               <%= yield %>
             </div>
           </div>

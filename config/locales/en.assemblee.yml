@@ -2,3 +2,6 @@ en:
   recordpresence: "Registrazione presenze"
   select: "Scegli"
   ispresent: " risulta già presente nell'assemblea "
+  delega: "delegato"
+  isappointed: " è Delegato per l'Assemblea Generale"
+  isnotappointed: " non è Delegato per l'Assemblea Generale"
