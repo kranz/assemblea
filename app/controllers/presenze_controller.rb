@@ -3,9 +3,15 @@ class PresenzeController < ApplicationController
   # GET /presenze
   # GET /presenze.json
   def index
-    @presenze = Presenza.joins(:socio).order('soci.socio').find(:all, :conditions => ['assemblea_id = ?', "#{session[:assemblea_id]}"])
     @assemblea = Assemblea.find(session[:assemblea_id])
-    @soci = Socio.page(params[:page]).search(params[:search])
+    if @assemblea.generale 
+      socio_class = Delegato
+      @presenze = Presenza.joins(:delegato).order('delegati.socio').find(:all, :conditions => ['assemblea_id = ?', "#{session[:assemblea_id]}"])
+    else
+      socio_class = Socio
+      @presenze = Presenza.joins(:socio).order('soci.socio').find(:all, :conditions => ['assemblea_id = ?', "#{session[:assemblea_id]}"])
+    end
+    @soci = socio_class.page(params[:page]).search(params[:search])
     if @soci
       if @soci.count == 1
         redirect_to registra_url(@soci[0])
@@ -91,14 +97,23 @@ class PresenzeController < ApplicationController
 
   def registra
     @assemblea = Assemblea.find(session[:assemblea_id])
-    @socio = Socio.find(params[:socio_id])
-    @checkpres = Presenza.find_by_socio_id(params[:socio_id])
-    if @checkpres 
-      redirect_to presenze_path, alert: @socio.socio + t('ispresent') + @checkpres.assemblea.nome
+    if @assemblea.generale 
+      socio_class = Delegato
+      @checkpres = Presenza.where("socio_id=? and assemblea_id=?",params[:socio_id],session[:assemblea_id])
     else
+      socio_class = Socio
+      @checkpres = Presenza.where("socio_id=?",params[:socio_id])
+    end
+    @socio = socio_class.find(params[:socio_id])
+#    @checkpres = Presenza.find_by_socio_id(params[:socio_id])
+    if @checkpres.empty?
       @presenza = Presenza.new
       @presenza.assemblea_id = session[:assemblea_id]
-      @presenza.socio_id = params[:socio_id]
+      if @assemblea.generale
+        @presenza.delegato_id = params[:socio_id]
+      else
+        @presenza.socio_id = params[:socio_id]
+       end
       @presenza.presente = "SI"
       @presenza.isdelegato = ""
       respond_to do |format|
@@ -110,6 +125,8 @@ class PresenzeController < ApplicationController
           format.json { render json: @presenza.errors, status: :unprocessable_entity }
         end
       end
+    else
+      redirect_to presenze_path, alert: @socio.socio + t('ispresent') + @checkpres.assemblea.nome
     end
   end 
 
@@ -126,6 +143,29 @@ class PresenzeController < ApplicationController
       end    
     end
   end
+
+  def invia_delegati
+    @presenze = Presenza.where("isdelegato=?", "SI").where("assemblea_id = ?", session[:assemblea_id])
+    @presenze.each do |presenza|
+      @delegato = Delegato.where("socio = ?", presenza.socio.socio)
+      if @delegato.count > 0 
+        puts "I MINOLLI GIA CI STANNO"
+      else
+        @attribs = presenza.socio.attributes
+        %w"id created_at updated_at".each{|v| @attribs.delete(v)}
+        @delegato = Delegato.new(@attribs)
+        @delegato.sezione = presenza.assemblea.sezione.nome
+        @delegato.save
+        presenza.delegato = @delegato
+        presenza.save
+        @delegato = :nil
+      end
+    end
+    respond_to do |format|
+      format.html
+    end
+  end
+
   private
  
   def require_assemblea

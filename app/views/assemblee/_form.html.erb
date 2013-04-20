@@ -12,6 +12,12 @@
     </div>
   </div>
   <div class="control-group">
+    <%= f.label :generale, "Assemblea Generale", :class => 'checkbox' %>
+    <div class="controls">
+      <%= f.check_box :generale, :class => 'number_field' %>
+    </div>
+  </div>  
+  <div class="control-group">
     <%= f.label :data, :class => 'control-label' %>
     <div class="controls">
       <%= f.date_select :data, :class => 'date_select' %>
