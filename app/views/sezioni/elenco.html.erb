@@ -1,0 +1,28 @@
+<%- model_class = Sezione -%>
+<div class="page-header">
+  <h1><%=t '.title', :default => model_class.model_name.human.pluralize %></h1>
+</div>
+<ul class="thumbnails">
+  <% @sezioni.each do |sezione| %>
+  <li class="span2">
+    <div class="thumbnail">
+      <%= image_tag sezione.foto.url(:thumb) %>
+      <p><%= sezione.nome %></p>
+      <%= link_to t('.edit', :default => t("helpers.links.edit")),
+                  edit_sezione_path(sezione), :class => 'btn btn-mini' %>
+      <%= link_to t('.destroy', :default => t("helpers.links.destroy")),
+                  sezione_path(sezione),
+                  :method => :delete,
+                  :data => { :confirm => t('.confirm', :default => t("helpers.links.confirm", :default => 'Are you sure?')) },
+                  :class => 'btn btn-mini btn-danger' %>      
+    </div>
+  </li>
+  <% end %>
+</ul>
+
+<%= link_to t('.new', :default => t("helpers.links.new")),
+            new_sezione_path,
+            :class => 'btn btn-primary' %>
+
+
+

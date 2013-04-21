@@ -13,7 +13,7 @@ class Delegato < ActiveRecord::Base
 	when nil
 	  nil
 	else 
-  	  where('socio LIKE ?', "%#{key}%")
+  	  where('socio LIKE ?', "#{key}%")
     end
   end
 end

@@ -2,7 +2,7 @@ class DelegatiController < ApplicationController
   # GET /delegati
   # GET /delegati.json
   def index
-    @delegati = Delegato.all
+    @delegati = Delegato.order("socio").all
 
     respond_to do |format|
       format.html # index.html.erb

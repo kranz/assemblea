@@ -5,7 +5,12 @@
       <%= f.text_field :nome, :class => 'text_field' %>
     </div>
   </div>
-
+  <div class="control-group">
+    <%= f.label :foto, "Foto", :class => 'control-label' %>
+    <div class="controls">
+      <%= f.file_field :foto, :class => 'text_field' %>
+    </div>
+  </div>  
   <div class="form-actions">
     <%= f.submit nil, :class => 'btn btn-primary' %>
     <%= link_to t('.cancel', :default => t("helpers.links.cancel")),

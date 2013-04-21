@@ -7,7 +7,9 @@
   <dt><strong><%= model_class.human_attribute_name(:nome) %>:</strong></dt>
   <dd><%= @sezione.nome %></dd>
 </dl>
-
+<%= image_tag @sezione.foto.url, :class => "img-rounded" %>
+<%= image_tag @sezione.foto.url(:medium), :class => "img-circle" %>
+<%= image_tag @sezione.foto.url(:thumb), :class => "img-polaroid" %>
 <div class="form-actions">
   <%= link_to t('.back', :default => t("helpers.links.back")),
               sezioni_path, :class => 'btn'  %>

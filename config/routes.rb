@@ -1,7 +1,7 @@
 AssembleaSoci::Application.routes.draw do
   resources :delegati
 
-
+  match 'sezioni/elenco' => 'sezioni#elenco', :as => :elencosezioni
   resources :sezioni
 
 
@@ -9,6 +9,7 @@ AssembleaSoci::Application.routes.draw do
   match 'presenze/inviadelegati' => 'presenze#invia_delegati', :as => :inviadelegati
   match 'presenze/setdelegato/:socio_id/:presenza_id' => 'presenze#setdelegato', :as => :delega
   match 'presenze/registra/:socio_id' => 'presenze#registra', :as => :registra
+
   resources :presenze
 
 

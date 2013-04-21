@@ -6,8 +6,8 @@
   <thead>
     <tr>
       <th><%= model_class.human_attribute_name(:id) %></th>
+      <th></th>
       <th><%= model_class.human_attribute_name(:nome) %></th>
-      <th><%= model_class.human_attribute_name(:created_at) %></th>
       <th><%=t '.actions', :default => t("helpers.actions") %></th>
     </tr>
   </thead>
@@ -15,8 +15,8 @@
     <% @sezioni.each do |sezione| %>
       <tr>
         <td><%= link_to sezione.id, sezione_path(sezione) %></td>
+        <td><%= image_tag sezione.foto.url(:thumb), :class => "img-polaroid" %></td>
         <td><%= sezione.nome %></td>
-        <td><%=l sezione.created_at %></td>
         <td>
           <%= link_to t('.edit', :default => t("helpers.links.edit")),
                       edit_sezione_path(sezione), :class => 'btn btn-mini' %>

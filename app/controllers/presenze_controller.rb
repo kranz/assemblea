@@ -11,7 +11,7 @@ class PresenzeController < ApplicationController
       socio_class = Socio
       @presenze = Presenza.joins(:socio).order('soci.socio').find(:all, :conditions => ['assemblea_id = ?', "#{session[:assemblea_id]}"])
     end
-    @soci = socio_class.page(params[:page]).search(params[:search])
+    @soci = socio_class.page(params[:page]).order('socio').search(params[:search])
     if @soci
       if @soci.count == 1
         redirect_to registra_url(@soci[0])
@@ -126,7 +126,7 @@ class PresenzeController < ApplicationController
         end
       end
     else
-      redirect_to presenze_path, alert: @socio.socio + t('ispresent') + @checkpres.assemblea.nome
+      redirect_to presenze_path, alert: @socio.socio + t('ispresent') + @checkpres[0].assemblea.nome
     end
   end 
 

@@ -10,6 +10,15 @@ class SezioniController < ApplicationController
     end
   end
 
+  def elenco
+    @sezioni = Sezione.order('nome').all
+
+    respond_to do |format|
+      format.html # index.html.erb
+      format.json { render json: @sezioni }
+    end
+  end
+
   # GET /sezioni/1
   # GET /sezioni/1.json
   def show
@@ -60,7 +69,7 @@ class SezioniController < ApplicationController
 
     respond_to do |format|
       if @sezione.update_attributes(params[:sezione])
-        format.html { redirect_to @sezione, notice: 'Sezione was successfully updated.' }
+        format.html { redirect_to elencosezioni_path, notice: 'Sezione was successfully updated.' }
         format.json { head :no_content }
       else
         format.html { render action: "edit" }
