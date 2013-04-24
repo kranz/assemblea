@@ -1,3 +1,11 @@
 it:
+  errors:
+    fnonlydelegati: "Funzione disponibile solo per l'Assemblea dei Delegati"
+    selmeetdel: "Selezionare l'Assemblea dei Delegati per poter utilizzare questa funzione"
+
   recordpresence: "Registra presenze"
   select: "Scegli"
+  ispresent: " risulta già presente nell'assemblea "
+  delega: "delegato"
+  isappointed: " è Delegato per l'Assemblea Generale"
+  isnotappointed: " non è Delegato per l'Assemblea Generale"

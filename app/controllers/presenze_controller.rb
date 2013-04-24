@@ -109,11 +109,10 @@ class PresenzeController < ApplicationController
     if @checkpres.empty?
       @presenza = Presenza.new
       @presenza.assemblea_id = session[:assemblea_id]
+      @presenza.socio_id = params[:socio_id]
       if @assemblea.generale
         @presenza.delegato_id = params[:socio_id]
-      else
-        @presenza.socio_id = params[:socio_id]
-       end
+      end
       @presenza.presente = "SI"
       @presenza.isdelegato = ""
       respond_to do |format|

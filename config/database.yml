@@ -38,5 +38,6 @@ production:
   database: assemblea_production
   pool: 5
   username: root
-  password: forzagenoa
+  password: Password$1
   socket: /var/run/mysqld/mysqld.sock
+

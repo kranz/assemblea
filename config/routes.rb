@@ -1,6 +1,6 @@
 AssembleaSoci::Application.routes.draw do
   resources :delegati
-
+  match 'live' => 'live#index'
   match 'sezioni/elenco' => 'sezioni#elenco', :as => :elencosezioni
   resources :sezioni
 

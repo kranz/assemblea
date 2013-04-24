@@ -3,6 +3,7 @@ it:
     actions: "Azioni"
     links:
       back: "Indietro"
+      edit: "Modifica"
       cancel: "Annulla"
       confirm: "Sei sicuro?"
       destroy: "Elimina"

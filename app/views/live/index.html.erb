@@ -1,0 +1,33 @@
+<div class="row-fluid">
+  <div id="mygauge" class="span3">	
+    <div class="presenti" data-differenza=<%= @differenza %> data-percent=<%= @percpresenti %>><%= @percpresenti%>%</div>
+  </div>
+</div>
+<div class="row">
+  <div class="span4">	
+    <div class="hero-unit">
+      <h2 class="text-center">quorum</h2>
+      <h1 class="text-center"><%= @quorum %><small> su </small><%= @totale %></h1>
+    </div>
+  </div>
+  <div class="span4">	
+    <div class="hero-unit">
+      <h2 class="text-center">presenti</h2>
+      <h1 class="text-center"><%= @presenti %></h1>
+    </div>
+  </div>
+  <div class="span4">	
+    <div class="hero-unit">
+      <h2 class="text-center">differenza</h2>
+      <%= content_tag(:h1, @differenza, :class => "text-center", :id => @diffid) %>
+    </div>
+  </div>
+</div>
+<div class="row-fluid">
+  <div id="mybanner" class="span6">
+    <h1 class="text-center">Assemblea dei Delegati</h1>
+    <p class="text-center">
+      <%= image_tag('Logo_Coop_Liguria.gif',:size => "146x100", :class => 'img-rounded') %>
+    </p>
+  </div>
+</div>

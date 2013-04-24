@@ -2,8 +2,12 @@
 # All this logic will automatically be available in application.js.
 # You can use CoffeeScript in this file: http://jashkenas.github.com/coffee-script/
 $ ->
-  $('#presenza_delegato').autocomplete
-    source: $('#presenza_delegato').data('autocomplete-source')
-
-  $('#search').focus()
-
+  $(".presenti").easyPieChart
+    trackColor: "#f0f0f0"
+    lineWidth: 30
+    size: 330
+    barColor: (percent) ->
+      if ($(".presenti").data("differenza") < 0)
+        "#ff0000"
+      else
+        "#33ff00"
