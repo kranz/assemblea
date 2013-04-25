@@ -1,0 +1,193 @@
+Processo step by step di generazione dell'ambiente per redberry
+
+AMBIENTE DA GENERARE
+
+SERVER UBUNTU 12.04
+RVM
+RUBY 2.0.0
+RUBY 1.9.3
+RAILS 3.2.9
+APACHE
+PASSENGER
+GIT
+CAPISTRANO
+
+
+
+1) Download dell'immagine ISO del sistema operativo
+UBUNTU 12.04.1 LTS Desktop
+
+Scarico la versione server 
+
+wget http://releases.ubuntu.com/precise/ubuntu-12.04.1-server-i386.iso
+
+2) monto la dir dove ci sono le ISO come datastore del vmware
+
+
+sudo apt-get install build-essential git-core
+sudo apt-get install curl
+sudo apt-get install libcurl4-openssl-dev libssl-dev zlib1g-dev 
+sudo apt-get install apache2-prefork-dev libapr1-dev libaprutil1-dev
+sudo apt-get install libxslt-dev libxml2-dev  
+sudo apt-get install apache2 apache2-doc apache2-utils
+sudo apt-get install mysql-server libmysqld-dev
+sudo apt-get install libreadline6-dev libyaml-dev sqlite3 autoconf libgdbm-dev libncurses5-dev 
+sudo apt-get install automake libtool bison libffi-dev
+
+Install RVM
+\curl -L https://get.rvm.io | bash -s stable
+
+echo '[[ -s "/home/admsecofr/.rvm/scripts/rvm" ]] && source "/home/admsecofr/.rvm/scripts/rvm"' >> ~/.bashrc
+
+source ~/.bashrc 
+
+type rvm | head -1
+
+rvm install 1.9.3 
+gem install rails
+sudo apt-get install apache2
+
+gem install passenger
+passenger-install-apache2-module
+
+Welcome to the Phusion Passenger Apache 2 module installer, v3.0.19.
+
+This installer will guide you through the entire installation process. It
+shouldn't take more than 3 minutes in total.
+
+Here's what you can expect from the installation process:
+
+ 1. The Apache 2 module will be installed for you.
+ 2. You'll learn how to configure Apache.
+ 3. You'll learn how to deploy a Ruby on Rails application.
+
+Don't worry if anything goes wrong. This installer will advise you on how to
+solve any problems.
+
+Press Enter to continue, or Ctrl-C to abort.
+--------------------------------------------
+
+Checking for required software...
+
+ * GNU C++ compiler... found at /usr/bin/g++
+ * Curl development headers with SSL support... found
+ * OpenSSL development headers... found
+ * Zlib development headers... found
+ * Ruby development headers... found
+ * OpenSSL support for Ruby... found
+ * RubyGems... found
+ * Rake... found at /home/admsecofr/.rvm/wrappers/ruby-1.9.3-p392/rake
+ * rack... found
+ * Apache 2... found at /usr/sbin/apache2
+ * Apache 2 development headers... found at /usr/bin/apxs2
+ * Apache Portable Runtime (APR) development headers... found at /usr/bin/apr-1-config
+ * Apache Portable Runtime Utility (APU) development headers... found at /usr/bin/apu-1-config
+
+--------------------------------------------
+Compiling and installing Apache 2 module...
+
+<omissis>
+   ......
+</omissis>
+
+The Apache 2 module was successfully installed.
+
+Please edit your Apache configuration file, and add these lines:
+
+   LoadModule passenger_module /home/admsecofr/.rvm/gems/ruby-1.9.3-p392/gems/passenger-3.0.19/ext/apache2/mod_passenger.so
+   PassengerRoot /home/admsecofr/.rvm/gems/ruby-1.9.3-p392/gems/passenger-3.0.19
+   PassengerRuby /home/admsecofr/.rvm/wrappers/ruby-1.9.3-p392/ruby
+
+After you restart Apache, you are ready to deploy any number of Ruby on Rails
+applications on Apache, without any further Ruby on Rails-specific
+configuration!
+
+Press ENTER to continue.
+--------------------------------------------
+Deploying a Ruby on Rails application: an example
+
+Suppose you have a Rails application in /somewhere. Add a virtual host to your
+Apache configuration file and set its DocumentRoot to /somewhere/public:
+
+   <VirtualHost *:80>
+      ServerName www.yourhost.com
+      # !!! Be sure to point DocumentRoot to 'public'!
+      DocumentRoot /somewhere/public    
+      <Directory /somewhere/public>
+         # This relaxes Apache security settings.
+         AllowOverride all
+         # MultiViews must be turned off.
+         Options -MultiViews
+      </Directory>
+   </VirtualHost>
+
+And that's it! You may also want to check the Users Guide for security and
+optimization tips, troubleshooting and other useful information:
+
+  /home/admsecofr/.rvm/gems/ruby-1.9.3-p392/gems/passenger-3.0.19/doc/Users guide Apache.html
+
+Enjoy Phusion Passenger, a product of Phusion (www.phusion.nl) :-)
+https://www.phusionpassenger.com
+
+Phusion Passenger is a trademark of Hongli Lai & Ninh Bui.
+
+
+
+Adesso installo capistrano sul client di sviluppo
+
+In Gemfile
+
+gem 'capistrano'
+bundle install
+
+vengono installati
+
+Installing highline (1.6.15) 
+Installing net-ssh (2.6.5) 
+Installing net-scp (1.1.0) 
+Installing net-sftp (2.1.1) 
+Installing net-ssh-gateway (1.2.0) 
+Installing capistrano (2.14.2) 
+
+A questo punto, nella home dir del progetto 
+
+capify .
+
+Aggiunge ./Capfile e ./config/deploy.rb
+
+In config/deploy.rb
+
+set :application, "redberry"
+default_run_options[:pty] = true
+set :repository,  "git@github.com:kranz/redberry.git"
+set :scm, :git 
+set :user, "admsecofr"  
+set :scm_passphrase, "Password$1"  # The deploy user's password
+set :branch, "master"
+set :deploy_via, :remote_cache
+
+role :web, "192.168.69.50"    # Your HTTP server, Apache/etc
+role :app, "192.168.69.50"    # This may be the same as your `Web` server
+role :db,  "192.168.69.50", :primary => true
+
+La prima volta che capistrano si connette a github non riesce a rispondere al prompt della chiave RSA. QUindi collegarsi una volta manualmente per accettare la chiave
+
+ssh git@github.com
+
+a questo punto 
+
+cap deploy
+
+CHiede la password di admsecofr, poi estrae da scm (github per noi) la versione contenuta nel branch indicato in deploy.rb.
+
+Bisogna precompilare gli asset
+
+rake assets:precompile --trace RAILS_ENV=production
+
+dopo di che, una volta fatto ripartire apache
+
+sudo /etc/init.d/apache2 restart
+
+Il tutto è magicamente in funzione!
+
+
