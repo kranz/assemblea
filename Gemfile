@@ -27,6 +27,7 @@ gem 'will_paginate-bootstrap'
 gem 'jquery-rails'
 gem 'debugger'
 gem "paperclip", "~> 3.0"
+gem "capistrano"
 
 # To use ActiveModel has_secure_password
 # gem 'bcrypt-ruby', '~> 3.0.0'
