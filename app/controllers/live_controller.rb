@@ -1,5 +1,5 @@
 class LiveController < ApplicationController
-  before_filter :assemblea_generale
+  before_filter :assemblea_generale, :only => :index
 
   def index
     @presenze = Presenza.find(:all, :conditions => ['assemblea_id = ?', "#{session[:assemblea_id]}"])
@@ -12,6 +12,12 @@ class LiveController < ApplicationController
     respond_to do |format|
       format.html # index.html.erb
       format.json { render json: @delegati }
+    end
+  end
+
+  def welcome
+    respond_to do |format|
+      format.html 
     end
   end
 

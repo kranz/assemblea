@@ -180,6 +180,12 @@ cap deploy
 
 CHiede la password di admsecofr, poi estrae da scm (github per noi) la versione contenuta nel branch indicato in deploy.rb.
 
+adesso 
+
+cd /home/admsecofr/rails/assemblea/shared/cached-copy
+bundle install
+bundle update debugger
+
 Bisogna precompilare gli asset
 
 rake assets:precompile --trace RAILS_ENV=production
