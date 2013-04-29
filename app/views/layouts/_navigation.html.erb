@@ -20,7 +20,7 @@
       <%= link_to('Edit account', edit_user_registration_path) %>
     </li>
     <li>
-      <%= link_to('Logout', destroy_user_session_path, :method=>'delete') %>
+      <%= link_to(content_tag(:i, "", :class => "icon-off"), destroy_user_session_path, :method=>'delete') %>
     </li>
     <% if session[:assemblea_id] %>
       <li>
