@@ -2,14 +2,16 @@
 <div class="page-header">
   <h1><%=t '.title', :default => model_class.model_name.human.pluralize %></h1>
 </div>
+<div class="text-center">
+  <%= will_paginate @assemblee, :renderer => BootstrapPagination::Rails  %>
+</div>
 <table class="table table-striped">
   <thead>
     <tr>
+      <th><%= model_class.human_attribute_name(:data) %></th>
       <th><%= model_class.human_attribute_name(:id) %></th>
       <th><%= model_class.human_attribute_name(:nome) %></th>
-      <th><%= model_class.human_attribute_name(:data) %></th>
       <th><%= model_class.human_attribute_name(:stato) %></th>
-      <th><%= model_class.human_attribute_name(:eliminato) %></th>
       <th><%= model_class.human_attribute_name(:presidente) %></th>
       <th><%= model_class.human_attribute_name(:orainizio) %></th>
       <th><%= model_class.human_attribute_name(:orafine) %></th>
@@ -19,11 +21,10 @@
   <tbody>
     <% @assemblee.each do |assemblea| %>
       <tr <%= 'class=success' if session[:assemblea_id]==assemblea.id.to_s %> <%= 'id=asbl'+assemblea.id.to_s %>>
+        <td><%= l(assemblea.data, :format => :long) %></td>
         <td><%= link_to assemblea.id, assemblea_path(assemblea) %></td>
         <td><%= assemblea.nome %></td>
-        <td><%= assemblea.data %></td>
         <td><%= assemblea.stato %></td>
-        <td><%= assemblea.eliminato %></td>
         <td><%= assemblea.presidente %></td>
         <td><%= l(assemblea.orainizio, :format => :timeonly) %></td>
         <td><%= l(assemblea.orafine, :format => :timeonly) %></td>

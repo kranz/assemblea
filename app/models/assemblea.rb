@@ -3,4 +3,6 @@ class Assemblea < ActiveRecord::Base
 
   has_many :presenze
   belongs_to :sezione
+  self.per_page = 11
+
 end

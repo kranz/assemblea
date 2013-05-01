@@ -2,8 +2,7 @@ class AssembleeController < ApplicationController
   # GET /assemblee
   # GET /assemblee.json
   def index
-    @assemblee = Assemblea.all
-
+    @assemblee = Assemblea.page(params[:page]).order('data ASC, nome ASC').all
     respond_to do |format|
       format.html # index.html.erb
       format.json { render json: @assemblee }
