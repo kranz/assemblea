@@ -12,6 +12,12 @@
     </div>
   </div>
   <div class="control-group">
+    <%= f.label :sede, :class => 'control-label' %>
+    <div class="controls">
+      <%= f.text_field :sede, :class => 'text_field' %>
+    </div>
+  </div>
+  <div class="control-group">
     <%= f.label :generale, "Assemblea Generale", :class => 'checkbox' %>
     <div class="controls">
       <%= f.check_box :generale, :class => 'number_field' %>
@@ -26,7 +32,7 @@
   <div class="control-group">
     <%= f.label :stato, :class => 'control-label' %>
     <div class="controls">
-      <%= f.number_field :stato, :class => 'number_field' %>
+      <%= f.text_field :stato, :class => 'text_field' %>
     </div>
   </div>
   <div class="control-group">

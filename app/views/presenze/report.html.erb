@@ -1,0 +1,79 @@
+<div class="row">
+  <div class="span6">
+    <table class="table table-bordered table-condensed">
+      <tr class="error">
+        <td colspan="2">
+          <div class="text-center">
+            <strong>Coop Liguria</strong>
+          </div>
+        </td>
+      </tr>
+      <tr class="error">
+        <td colspan="2">
+          <div class="text-center">
+            <strong><%= @assemblea.sede %></strong>
+          </div>
+        </td>
+      </tr>
+      <tr>
+        <td>Sezione</td>
+        <td><strong><%= @assemblea.sezione.nome %></strong></td>
+      </tr>
+      <tr>
+        <td>Assemblea dei soci del</td>
+        <td><strong><%= l(@assemblea.data) %></strong></td>
+      </tr>
+      <tr>
+        <td>Presidente</td>
+        <td><strong><%= @assemblea.presidente %></strong></td>
+      </tr>
+      <tr>
+        <td>Inizio ore</td>
+        <td><strong><%= @assemblea.orainizio.strftime("%H:%M") %></strong></td>
+      </tr>
+      <tr>
+        <td>Termine ore</td>
+        <td><strong><%= @assemblea.orafine.strftime("%H:%M") %></strong></td>
+      </tr>
+      <tr>
+        <td>Presenti</td>
+        <td><strong><%= @presenti %></strong></td>
+      </tr>
+      <tr>
+        <td>Per delega</td>
+        <td><strong><%= @perdelega %></strong></td>
+      </tr>
+      <tr>
+        <td>Totale partecipanti</td>
+        <td><strong><%= @totpresenti %></strong></td>
+      </tr>
+    </table>
+     <table class="table table-bordered table-condensed">
+      <tr class="info">
+        <td colspan="3">
+          <div class="text-center"><strong>Elenco dei delegati</strong></div>
+        </td>
+      </tr>
+      <tr>
+          <th>Cognome e Nome</th>
+          <th>Data di Nascita</th>
+          <th>Codice Tessera</th>
+      </tr>
+      <tbody>
+        <% @delegati.each do |delegato| %>
+          <tr>
+            <% if @assemblea.generale %>
+              <td><%= delegato.delegato.socio %></td>
+              <td><%= delegato.delegato.datanascita %></td>
+              <td><%= delegato.delegato.codtessera %></td>
+            <% else %>
+              <td><%= delegato.socio.socio %></td>
+              <td><%= delegato.socio.datanascita %></td>
+              <td><%= delegato.socio.codtessera %></td>
+            <% end %>
+          </tr>
+        <% end %>
+      </tbody>
+    </table>    
+  </div>
+</div>

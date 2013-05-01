@@ -25,8 +25,8 @@
         <td><%= assemblea.stato %></td>
         <td><%= assemblea.eliminato %></td>
         <td><%= assemblea.presidente %></td>
-        <td><%= assemblea.orainizio.strftime("%H:%M") %></td>
-        <td><%= assemblea.orafine.strftime("%H:%M") %></td>
+        <td><%= l(assemblea.orainizio, :format => :timeonly) %></td>
+        <td><%= l(assemblea.orafine, :format => :timeonly) %></td>
         <td>
           <%= link_to t('.edit', :default => t("helpers.links.edit")),
                       edit_assemblea_path(assemblea), :class => 'btn btn-mini' %>

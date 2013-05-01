@@ -12,8 +12,11 @@
     <% soci.each do |socio| %>
       <tr>
         <td>
-          <%= link_to t('.registra', :default => t("helpers.links.register")),
+          <%= link_to t('registra', :default => t("helpers.links.register")),
                       registra_path(socio), :class => 'btn btn-mini btn-success' %>
+          <%= link_to t('condelega'),
+                      registra_path(socio,"SI"), :class => 'btn btn-mini btn-warning' %>
+
         </td>
         <td><%= socio.socio %></td>
         <td><%= socio.datanascita.strftime("%d/%m/%Y") unless !socio.datanascita %></td>

@@ -9,3 +9,7 @@ it:
   delega: "delegato"
   isappointed: " è Delegato per l'Assemblea Generale"
   isnotappointed: " non è Delegato per l'Assemblea Generale"
+  registra: "Registra"
+  condelega: "Delega"
+  fineassemblea: "Fine Assemblea"
+  noreport: "Non è stato possibile chiudere l'assemblea"

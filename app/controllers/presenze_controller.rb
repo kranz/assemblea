@@ -10,6 +10,9 @@ class PresenzeController < ApplicationController
     else
       socio_class = Socio
       @presenze = Presenza.joins(:socio).order('soci.socio').find(:all, :conditions => ['assemblea_id = ?', "#{session[:assemblea_id]}"])
+      @totpresenti = @presenze.count
+      @perdelega = Presenza.find(:all, :conditions => ['assemblea_id = ? AND condelega = ?', "#{session[:assemblea_id]}", "SI"]).count
+      @presenti = @totpresenti - @perdelega
     end
     @soci = socio_class.page(params[:page]).order('socio').search(params[:search])
     if @soci
@@ -23,6 +26,31 @@ class PresenzeController < ApplicationController
       end
     end
   end
+
+  def report
+    @assemblea = Assemblea.find(session[:assemblea_id])
+    if @assemblea.generale 
+      socio_class = Delegato
+      @presenze = Presenza.find(:all, :conditions => ['assemblea_id = ?', "#{session[:assemblea_id]}"])
+      @delegati = Presenza.joins(:delegato).order('delegati.socio').find(:all, :conditions => ['assemblea_id = ? AND isdelegato=?', "#{session[:assemblea_id]}","SI"])
+    else
+      socio_class = Socio
+      @delegati = Presenza.joins(:socio).order('soci.socio').find(:all, :conditions => ['assemblea_id = ? AND isdelegato=?', "#{session[:assemblea_id]}", "SI"])
+    end
+    @assemblea.orafine = Time.now
+    @assemblea.stato = "CHIUSA"
+    @totpresenti = Presenza.find(:all, :conditions => ['assemblea_id = ?', "#{session[:assemblea_id]}"]).count
+    @perdelega = Presenza.find(:all, :conditions => ['assemblea_id = ? AND condelega = ?', "#{session[:assemblea_id]}", "SI"]).count
+    @presenti = @totpresenti - @perdelega
+    respond_to do |format|
+      if @assemblea.save
+        format.html # index.html.erb
+      else
+        format.html {redirect_to presenze_path, notice: t('noreport')}
+      end
+    end
+  end
+
 
   # GET /presenze/1
   # GET /presenze/1.json
@@ -113,6 +141,7 @@ class PresenzeController < ApplicationController
       if @assemblea.generale
         @presenza.delegato_id = params[:socio_id]
       end
+      @presenza.condelega = params[:condelega] 
       @presenza.presente = "SI"
       @presenza.isdelegato = ""
       respond_to do |format|

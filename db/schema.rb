@@ -11,12 +11,12 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130421141854) do
+ActiveRecord::Schema.define(:version => 20130501064716) do
 
   create_table "assemblee", :force => true do |t|
     t.string   "nome"
     t.date     "data"
-    t.integer  "stato"
+    t.string   "stato"
     t.string   "eliminato"
     t.string   "presidente"
     t.time     "orainizio"
@@ -25,6 +25,7 @@ ActiveRecord::Schema.define(:version => 20130421141854) do
     t.datetime "updated_at", :null => false
     t.integer  "sezione_id"
     t.boolean  "generale"
+    t.string   "sede"
   end
 
   create_table "delegati", :force => true do |t|
@@ -45,6 +46,7 @@ ActiveRecord::Schema.define(:version => 20130421141854) do
     t.datetime "created_at",   :null => false
     t.datetime "updated_at",   :null => false
     t.integer  "delegato_id"
+    t.string   "condelega"
   end
 
   create_table "sezioni", :force => true do |t|

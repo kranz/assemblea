@@ -7,9 +7,10 @@ AssembleaSoci::Application.routes.draw do
 
 
   devise_for :users, path_names: {sign_in: "login", sign_out: "logout"}
+  match 'presenze/report' => 'presenze#report', :as => :report
   match 'presenze/inviadelegati' => 'presenze#invia_delegati', :as => :inviadelegati
   match 'presenze/setdelegato/:socio_id/:presenza_id' => 'presenze#setdelegato', :as => :delega
-  match 'presenze/registra/:socio_id' => 'presenze#registra', :as => :registra
+  match 'presenze/registra/:socio_id(/:condelega)' => 'presenze#registra', :as => :registra
 
   resources :presenze
 
