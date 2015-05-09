@@ -36,6 +36,7 @@ class PresenzeController < ApplicationController
     else
       socio_class = Socio
       @delegati = Presenza.joins(:socio).order('soci.socio').find(:all, :conditions => ['assemblea_id = ? AND isdelegato=?', "#{session[:assemblea_id]}", "SI"])
+      @presenze = Presenza.joins(:socio).order('soci.socio').find(:all, :conditions => ['assemblea_id =?', "#{session[:assemblea_id]}"])
     end
     @assemblea.orafine = Time.now
     @assemblea.stato = "CHIUSA"
